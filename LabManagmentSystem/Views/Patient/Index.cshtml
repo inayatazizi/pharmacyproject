@@ -1,0 +1,61 @@
+﻿@model IEnumerable<LabManagmentSystem.Models.Patient_Table>
+
+@{
+    ViewData["Title"] = "Patient Deatails";
+}
+
+<div class=" row container-fluid ">
+    <div class="col-md-12">
+        <h1 class="font-weight-bold mt-3 ml-3 text text-center">Patient Details </h1>
+    </div>
+    <div class="col-md-12">
+            <p class="text-lg-right ">
+                <a asp-action="CreatePatient" class="btn float-right  " style="background-color: rgb(50,65,72); color:white">Create New</a>
+            </p>
+        </div>
+    <div class="col-md-12 mt-2">
+        <table class="table table-bordered table-striped ">
+            <thead>
+                <tr class="table-hover font-weight-bold ">
+                    <th>
+                        First Name
+                    </th>                   
+                    <th>
+                        Mobile No
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Appointment Date
+                    </th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MobileNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointDate)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Patient_Id" class="btn text-secondary "><i class="fas fa-marker" style="color:forestgreen"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Patient_Id" class="btn text-danger"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+</div>

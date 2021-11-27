@@ -1,0 +1,174 @@
+﻿@model LabManagmentSystem.Models.Patient_Table
+
+@{
+    ViewData["Title"] = "Add Patient";
+}
+<div class="d-flex">
+    <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-item"><i class="fas fa-user-injured mt-auto text-orange ml-2"></i>  Patient</a>
+        <span class="breadcrumb-item active">Patient Registeration</span>
+    </div>
+    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+</div>
+<h1 class="font-weight-bold text-center pt-4"> Test Appointment</h1>
+<div>
+    <a asp-action="Index" class="btn btn-dark float-right mr-4 w-25">Back to List</a>
+</div>
+<hr />
+<div class=" container row p-0 m-0">
+    <div class="col-md-8 offset-md-2">
+        <form asp-action="CreatePatient" id="createform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-md-5 offest-md-1">
+                    <label asp-for="FirstName" class="control-label"> First Name:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="FirstName" class="form-control form-control-user" placeholder="First Name" required>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5 offest-md-1">
+                    <label asp-for="LastName" class="control-label"> Last Name:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="LastName" class="form-control " placeholder="Last Name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-5 offest-md-1">
+                    <label asp-for="Age" class="control-label"> Age:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="Age" class="form-control " placeholder="Age" required>
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-5 offest-md-1">
+                    <label asp-for="Sex" class="control-label"> Gender:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="Sex" class="form-control " placeholder="Gender" required>
+                        <span asp-validation-for="Sex" class="text-danger"></span>
+                    </div>
+                </div>               
+            </div>
+            <div class="form-group row">                
+                <div class="col-md-5 offest-md-1 ">
+                    <label asp-for="Email" class="control-label"> Email:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-envelope-open-text"></i></div>
+                        <input asp-for="Email" class="form-control " placeholder="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-5 offest-md-1">
+                    <label asp-for="MobileNo" class="control-label"> Mobile No:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                        <input asp-for="MobileNo" class="form-control " placeholder="MobileNo" required>
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-5 offest-md-1">
+                    <label for="basicinput">Test</label>
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <div class="form-group form-group-feedback form-group-feedback-left">
+                            <select class="form-control select2" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" asp-for="Test.TestId" asp-items="@ViewBag.testName">
+                                <option value="" ></option>
+                            </select>
+                            <div class="form-control-feedback bgwidth">
+                                <i class="icon-home iconwidth"></i>
+                            </div>
+                        </div>
+                    </div>                  
+                </div>
+                        @*<div class=" col-md-5 offest-md-1 ">
+                            <label for="basicinput">Price</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <select class="form-control select2" style="width: 100%;" data-select2-id="1" tabindex="-1" asp-for="Test.TestId" id="HostelId" aria-hidden="true"
+                                        asp-items="ViewBag.Name">
+                                </select>
+                                <div class="form-control-feedback  bgwidth">
+                                    <i class="icon-home8 iconwidth"></i>
+                                </div>
+                            </div>
+                        </div>*@                     
+                   </div>
+                    <div class="form-group row">
+                        <div class="col-md-5 offest-md-1">
+                            <label asp-for="AppointDate" class="control-label"> Appointment Date:</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                                <input asp-for="AppointDate" class="form-control " type="datetime-local" placeholder="UserName" required>
+                                <span asp-validation-for="AppointDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5 offest-md-1">
+                            <label asp-for="Address" class="control-label"> Address:</label>
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-home"></i></div>
+                                <input asp-for="Address" class="form-control " placeholder="Address">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center col-md-12 mb-2">
+                        <input type="submit" value="Save" class="btn btn-primary float-right mr-2 mb-2 w-25" />
+                    </div>
+</form>
+    </div>
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">List of Patients</div>
+            <div class="card-body">
+                <ejs-grid id="Grid" allowExcelExport="true" allowGrouping="true" allowPdfExport="true" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" })">
+                    <e-data-manager url="/Patient/PatientList"></e-data-manager>
+                    <e-grid-columns>
+                        <e-grid-column field="FirstName" headerText="Patient Name" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="MobileNo" headerText="Mobile" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="Test" headerText="Test" textAlign="Left" format="yMd"></e-grid-column>
+                        <e-grid-column field="Sex" headerText="Gender" textAlign="Left" format="yMd"></e-grid-column>
+                        <e-grid-column field="AppointDate" headerText="Appoint Date" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="Email" headerText="E-mail" textAlign="Left"></e-grid-column>
+                        <e-grid-column headerText="Action" textAlign="Center" template="#templateEdit"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
+                @*<script id="templateEdit" type="text/x-jsrender">
+            <div>
+                <a class="mr-3" href="javascript:;" onclick="NewPatientGroup($, { index })"><i class="icomoon icon-pencil5 mr-2"></i></a>
+                <a class="mr-3" href="javascript:;" onclick="removeOutbox($, { index })"><i class="icomoon icon-bin"></i></a>
+            </div>
+        </script>*@
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        function NewPatientGroup(index) {
+            if (index) {
+                let obj = document.getElementById("Grid").ej2_instances[0];
+                let id = obj.currentViewData[index].id;
+                if (id) {
+                    $('#createform #Patient_Id').val(obj.currentViewData[index].id);
+                    $('##createform #FirstName').val(obj.currentViewData[index].name11);
+                }
+            }
+            var modal = $('#modal_newPatient').modal('show');
+
+            modal.on('hidden.bs.modal', function () {
+                resetForm();
+            });
+
+    </script>
+
+
+
+
+
+

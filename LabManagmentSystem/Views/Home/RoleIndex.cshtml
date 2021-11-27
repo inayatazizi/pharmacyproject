@@ -1,0 +1,43 @@
+﻿@model IList<LabManagmentSystem.ViewModels.RoleStore>
+
+@{
+    ViewData["Title"] = "RoleIndex";
+}
+<div class="container">
+    <div class="col-md-4 offset-md-4">
+        <h1 class="text-center font-weight-bold">Role </h1>
+        <div class="container ">
+            <button class="btn btn-info ml-5"> <a asp-action="CreateRole"> Add Role</a></button>
+                
+           
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="font-weight-bold">
+                            Role Name
+                        </th>
+                        <th class="font-weight-bold ">
+                            &nbsp;&nbsp;&nbsp; Action
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoleName)
+                            </td>
+                            <td>
+
+                                <a asp-action="EditRole" asp-route-id="@item.Id" class="text-success">Edit</a> |
+                                <a asp-action="DeleteRole" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

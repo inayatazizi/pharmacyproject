@@ -1,0 +1,74 @@
+﻿@model LabManagmentSystem.Models.Test
+
+@{
+    ViewData["Title"] = "AddTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="font-weight-bold text-center pt-4"> Add Test</h1>
+@*<div>
+    <a asp-action="TestDetail" class="btn btn-dark float-right mr-4 w-25">Back to List</a>
+</div>*@
+<hr />
+<div class=" container row p-0 m-0">
+    <div class="col-md-12">
+        <form asp-action="AddTest" id="frm-folder-group" role="form" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed" data-ajax-success="success" data-ajax-begin="begin">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="TestCode" class="control-label font-weight-bold">Test Code</label>
+                    <input asp-for="TestCode" class="form-control" />
+                    <span asp-validation-for="TestCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="TestName" class="control-label font-weight-bold">Test Name</label>
+                    <input asp-for="TestName" class="form-control" />
+                    <span asp-validation-for="TestName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="TestDescription" class="control-label font-weight-bold">Test Description</label>
+                    <input asp-for="TestDescription" class="form-control" />
+                    <span asp-validation-for="TestDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="TestPrice" class="control-label font-weight-bold">Test Price</label>
+                    <input asp-for="TestPrice" type="number" class="form-control" />
+                    <span asp-validation-for="TestPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-3 offset-md-6">
+                <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">List of Patients</div>
+            <div class="card-body">
+                <ejs-grid id="Grid" allowExcelExport="true" allowGrouping="true" allowPdfExport="true" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" })">
+                    <e-data-manager url="/Test/TestList" adaptor="UrlAdaptor"></e-data-manager>
+                    <e-grid-columns>
+                        <e-grid-column field="TestName" headerText=" Name" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="TestCode" headerText="TestCode" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="TestDescription" headerText="Test Description" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="TestPrice" headerText="TestPrice" textAlign="Left" format="yMd"></e-grid-column>
+                        <e-grid-column headerText="Action" textAlign="Center" template="#templateEdit"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
+                @*<script id="templateEdit" type="text/x-jsrender">
+                        <div>
+                            <a class="mr-3" href="javascript:;" onclick="NewPatientGroup($, { index })"><i class="icomoon icon-pencil5 mr-2"></i></a>
+                            <a class="mr-3" href="javascript:;" onclick="removeOutbox($, { index })"><i class="icomoon icon-bin"></i></a>
+                        </div>
+                    </script>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

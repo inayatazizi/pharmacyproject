@@ -1,0 +1,119 @@
+﻿@model LabManagmentSystem.Models.Proffessional
+
+@{
+    ViewData["Title"] = "ProffRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row container">
+    <h2 class="text-center mt-2">Create Proffessional</h2>
+    @*<div class="col-md-2 offset-md-8">
+        <a asp-action="ProfDetails" class="btn btn-dark float-right btn-block">Back to List</a>
+    </div>*@
+    <hr />
+    <div class="col-md-8 offset-md-2">
+        <form id="Frm_Room" action="/Proffessional/ProffRegister" role="form" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed" data-ajax-begin="begin">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-4 offest-md-1 font-weight-bold">
+                    <label asp-for="Name" class="control-label">Name:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="Name" class="form-control form-control-user" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 offest-md-1 font-weight-bold">
+                    <label asp-for="Email " class="control-label"> E-mail:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-envelope-open"></i></div>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 offest-md-1 font-weight-bold font-weight-bold">
+                    <label asp-for="MobileNo" class="control-label">Mobile No:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-solid fa-mobile"></i></div>
+                        <input asp-for="MobileNo" class="form-control" />
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 offest-md-1 font-weight-bold">
+                    <label asp-for="Department" class="control-label">Department </label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-building"></i></div>
+                        <input asp-for="Department" class="form-control" />
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 offest-md-2 font-weight-bold">
+                    <label asp-for="Qualification" class="control-label">Qualification:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-graduation-cap"></i></div>
+                        <input asp-for="Qualification" class="form-control" />
+                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group col-md-4 offest-md-2 font-weight-bold">
+                    <label asp-for="University" class="control-label">University:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"> <i class="fas fa-university" aria-hidden="true"></i></div>
+                        <input asp-for="University" class="form-control" />
+                        <span asp-validation-for="University" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 offest-md-2 font-weight-bold">
+                    <label asp-for="Experince" class="control-label">Experince:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user-md"></i></div>
+                        <input asp-for="Experince" class="form-control" />
+                        <span asp-validation-for="Experince" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 offest-md-2 font-weight-bold">
+                    <label asp-for="Address" class="control-label">Address:</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-3 offset-md-6">
+                <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">List of Patients</div>
+            <div class="card-body">
+                <ejs-grid id="Grid"  allowExcelExport="true" allowGrouping="true" allowPdfExport="true" toolbar="@(new List<string>() {"ExcelExport", "PdfExport", "CsvExport" })">
+                    <e-data-manager url="/Proffessional/ProList"></e-data-manager>
+                    <e-grid-columns>
+                        <e-grid-column field="Name" headerText=" Name" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="MobileNo" headerText="Mobile" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="Email" headerText="E-mail" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="Experince" headerText="Experince" textAlign="Left" format="yMd"></e-grid-column>
+                        <e-grid-column field="Department" headerText="Department" textAlign="Left" format="yMd"></e-grid-column>
+                        <e-grid-column field="Qualification" headerText="Qualification" textAlign="Left"></e-grid-column>
+                        <e-grid-column field="University" headerText="University" textAlign="Left"></e-grid-column>
+                        <e-grid-column headerText="Action" textAlign="Center" template="#templateEdit"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
+                @*<script id="templateEdit" type="text/x-jsrender">
+                        <div>
+                            <a class="mr-3" href="javascript:;" onclick="NewPatientGroup($, { index })"><i class="icomoon icon-pencil5 mr-2"></i></a>
+                            <a class="mr-3" href="javascript:;" onclick="removeOutbox($, { index })"><i class="icomoon icon-bin"></i></a>
+                        </div>
+                    </script>*@
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@page
+@model LogoutModel
+@{
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+    ViewData["Title"] = "Log out";
+
+}
+
+<header>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            <form class="form-inline" asp-area="Identity" asp-page="Identity/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button  type="submit" class="nav-link btn btn-link text-dark" value="Redirect Me" onclick="Redirect();">You have successfully logged out of the application.</button>
+            </form>
+        }
+        else
+        {
+            <p  value="Redirect Me" onclick="Redirect();" >You have successfully logged out of the application.</p>
+        }
+
+    }
+</header>
+<script type="text/javascript">
+
+    function Redirect() {
+    window.location = "/Landing/Index";
+    }
+    /* document.write("You will be redirected to main page in 05 sec.");*/
+    setTimeout('Redirect()', 1000);
+
+</script>
+
+@*@page
+    @model LogoutModel
+    @{
+        ViewData["Title"] = "Log out";
+    }
+
+    <header>
+        <h1>@ViewData["Title"]</h1>
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                </form>
+            }
+            else
+            {
+                <p>You have successfully logged out of the application.</p>
+            }
+        }
+    </header>*@
