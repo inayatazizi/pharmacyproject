@@ -1,0 +1,143 @@
+﻿@model PathologyLabManagment.Models.PatientSignUp
+
+@{
+    ViewData["Title"] = "CreateSignUpPatient";
+}
+@*<div class="d-flex">
+    <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-item"><i class="fas fa-user-injured mt-auto text-orange ml-2"></i>  Patient</a>
+        <span class="breadcrumb-item active">Patient Registeration</span>
+    </div>
+    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+</div>*@
+<h1 class="font-weight-bold text-center pt-4"> Test Appointment</h1>
+<div>
+    <a asp-action="PatientSignUpDeatails" class="btn btn-dark float-right mr-4 w-25">Back to List</a>
+</div>
+<hr />
+<div class=" container row p-0 m-0">
+    <div class="col-md-12">
+        <form asp-action="CreateSignUpPatient">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+            <div class="form-group row">
+                <div class="col-md-4" >
+                    <label asp-for="FirstName" class="control-label"> First Name:</label>
+                    <div class="input-group" >
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="FirstName" class="form-control form-control-user" placeholder="First Name" required>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="MiddleName" class="control-label"> Middle Name:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="MiddleName" class="form-control " placeholder="Middle Name">
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="LastName" class="control-label"> Last Name:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="LastName" class="form-control " placeholder="Last Name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="Age" class="control-label"> Age:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="Age" class="form-control " placeholder="Age" required>
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Sex" class="control-label"> Gender:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input asp-for="Sex" class="form-control " placeholder="Gender" required>
+                        <span asp-validation-for="Sex" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="MobileNo" class="control-label"> Mobile No:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-phone-alt"></i></div> 
+                        <input asp-for="MobileNo" class="form-control " placeholder="MobileNo" required>
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label asp-for="Address" class="control-label"> Address:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-home"></i></div>
+                        <textarea asp-for="Address" class="form-control " placeholder="Address"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="control-label"> Email:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-envelope-open-text"></i></div>
+                        <input asp-for="Email" class="form-control " placeholder="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label asp-for="Test" class="control-label">  Test:</label>
+                        <div class="input-group">
+                            <div class="input-group-text" ><i class="fas fa-calendar"></i></div>
+                            @*<input asp-for="Test" class="form-control " type="text" required >
+                                     <span asp-validation-for="Test" class="text-danger"></span>*@
+                        <select class="form-select" aria-label="default select example" required>
+                            <option selected>select test</option>
+                            <option value="1">antinuclear antibody</option>
+                            <option value="2">bnp testing</option>
+                            <option value="3">peripheral blood smear</option>
+                            <option value="3">blood chemistry study</option>
+
+                        </select>
+                        </div>  
+                    </div>                
+                    <div class="col-md-6">
+                        <label asp-for="AppointDate" class="control-label"> Appointment Date:</label>
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                            <input asp-for="AppointDate" class="form-control " type="datetime-local" placeholder="UserName" required>
+                            <span asp-validation-for="AppointDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            
+            
+                @*<div class="col-md-6">
+                    <label asp-for="AppointTime" class="control-label"> Apppointment Time:</label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                        <input asp-for="AppointTime" class="form-control" type="datetime-local" placeholder="Select Appointemt Time">
+                        <span asp-validation-for="AppointTime" class="text-danger"></span>
+                    </div>
+                </div>*@
+           
+            <div class="form-group text-center col-md-12 mb-2">
+                <input type="submit" value="Save" class="btn btn-primary float-right mr-2 mb-2 w-25" />
+            </div>
+        </form>
+    </div>
+</div>
+<ejs-grid id="">
+
+</ejs-grid>
+
+

@@ -1,0 +1,146 @@
+﻿
+
+
+@model PathologyLabManagment.Models.PatientSignUp
+@{ Layout = null;}
+
+
+<div class="row " id="modal_newPatient">
+
+    <form asp-action="PatientCreate" asp-controller="Pathology" id="createform" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Patient Name</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+                <input asp-for="FirstName" type="text" class="form-control" />
+                <input asp-for="MiddleName" type="text" class="form-control" />
+                <input asp-for="LastName" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Age</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="Age" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Gender</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="Sex" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">E-mail</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="Email" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Select Test</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="Test" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Dr.Name</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="DrName" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Mobile No</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+                <input asp-for="MobileNo" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Appointment</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+                <input asp-for="AppointDate" type="datetime-local" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <label class="col-form-label">Address</label>
+            <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-globe-europe"></i></span></div>
+
+                <input asp-for="Address" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12">
+            <button class="btn btn-primary" onclick="NewPatientGroup()">Save</button>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card card-primary w-100">
+    <div class="card-header">
+        <h3 class="card-title">List of Patients</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <ejs-grid id="Grid" allowPaging="true" allowSorting="true" allowSelection="true" showColumnMenu="true" showColumnChooser="true" toolbar="@(new List<string>() { "Search", "ColumnChooser"})">
+            <e-data-manager url="/Pathology/PatientList" adaptor="UrlAdaptor"></e-data-manager>
+            <e-grid-pagesettings pageSize="10" pageSizes="new { }"></e-grid-pagesettings>
+            <e-grid-selectionsettings persistSelection="true" type="Multiple" checkboxOnly="true"></e-grid-selectionsettings>
+            <e-grid-columns>
+                <e-grid-column field="" type="checkbox" width="60" allowSorting="false"></e-grid-column>
+                <e-grid-column field="FirstName" headerText="Patient Name" textAlign="Left"></e-grid-column>
+                <e-grid-column field="MobileNo" headerText="Mobile" textAlign="Left"></e-grid-column>
+                <e-grid-column field="Test" headerText="Test" textAlign="Left" format="yMd"></e-grid-column>
+                <e-grid-column field="Sex" headerText="Gender" textAlign="Left" format="yMd"></e-grid-column>
+                <e-grid-column field="AppointDate" headerText="Appoint Date" textAlign="Left"></e-grid-column>
+                <e-grid-column field="Email" headerText="E-mail" textAlign="Left"></e-grid-column>
+                <e-grid-column field="" headerText="Action" textAlign="Center" template="#templateEdit"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+        <script id="templateEdit" type="text/x-jsrender">
+            <div>
+                <a class="mr-3" href="javascript:;" onclick="NewPatientGroup($, { index })"><i class="icomoon icon-pencil5 mr-2"></i></a>
+                <a class="mr-3" href="javascript:;" onclick="removeOutbox($, { index })"><i class="icomoon icon-bin"></i></a>
+            </div>
+        </script>
+    </div>
+    <!-- /.card-body -->
+</div>
+@section Scripts
+
+{
+    <script type="text/javascript">
+        function NewPatientGroup(index) {
+            if (index) {
+                let obj = document.getElementById("Grid").ej2_instances[0];
+                let id = obj.currentViewData[index].id;
+                if (id) {
+                    $('#createform #Patient_Id').val(obj.currentViewData[index].id);
+                    $('##createform #FirstName').val(obj.currentViewData[index].name11);
+                }
+            }
+            //var enforceModalFocusFn = $.fn.modal.Constructor.prototype._enforceFocus;
+            //$.fn.modal.Constructor.prototype._enforceFocus = function () { };
+            var modal = $('#modal_newPatient').modal('show');
+
+            modal.on('hidden.bs.modal', function () {
+                resetForm();
+            });
+
+    </script>
+}

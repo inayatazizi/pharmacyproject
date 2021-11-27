@@ -1,0 +1,167 @@
+﻿@model IEnumerable<PathologyLabManagment.Models.PatientSignUp>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card ">
+    <div class="card-header">
+        Patient Appointments
+    </div>
+    <div class="card-body">
+        <button class="float-right" type="button" onclick="PatientCreate()">Add Patient</button>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Dr.Name</th>
+                    <th>Patient Name</th>
+                    <th>Address</th>
+                    <th>Appointents</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Mobile No</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.DrName</td>
+                        <td>@item.FirstName @item.MiddleName @item.LastName</td>
+                        <td>@item.Address</td>
+                        <td>@item.AppointDate.ToString("dd-MMMM-yyyy hh:mm tt")</td>
+                        <td>@item.Email</td>
+                        <td>@item.Age</td>
+                        <td>@item.MobileNo</td>
+                        <td><span class="fa fa-edit mr-2"  style="color:green" onclick="EditPatient(@item.Patient_Id,this)"></span><span class="fa fa-trash-alt" style="color:red" onclick="DeletePatient(@item.Patient_Id)"></span></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade editPatient" id="editPatient-modal-container ">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+
+                <h3 class="font-weight-lighter mt-1">Edit Patient</h3>
+            </div>
+            <div class="card-body ">
+                <div id="divArea">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{ 
+
+
+<script>
+
+
+    function EditPatient(pId) {
+
+        $.ajax({
+            url: '/Pathology/EditPatient',
+            data: { id: pId },
+            success: function (data) {
+               
+                $("#divArea").html(data);
+                $(".editPatient").modal('show');
+                $('.editPatient').on('hidden.bs.modal', function (e) {
+                    window.location.reload();
+                })
+            },
+            error: function () {
+
+            },
+            completed: function () {
+
+            }
+        })
+
+    }
+
+    function DeletePatient(pId) {
+       
+        swal({
+            title: 'Are you sure delete?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Yes',
+            denyButtonText: `Cancel`,
+            
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: '/Pathology/DeletePatient',
+                    data: { id: pId },
+                    success: function (data) {
+                        if (data.status == 0) {
+
+                            swal({
+                                text: data.message,
+                                icon: 'success'
+                            })
+
+                            span.closest('tr').remove();
+                        }
+                        else{
+                            swal({
+                                text: data.message,
+                                icon: 'error'
+                            })
+                        }
+                    },
+                    error: function () {
+
+                    },
+                    completed: function () {
+
+                    }
+                })
+
+               
+            }
+        })
+
+    }
+
+
+    function PatientCreate() {
+
+        $.ajax({
+            url: '/Pathology/PatientCreateView',
+            success: function (data) {
+                $("#divArea").html(data);
+                $(".editPatient").modal('show');
+                $('.editPatient').on('hidden.bs.modal', function (e) {
+                    window.location.reload();
+                })
+            },
+            error: function () {
+
+            },
+            completed: function () {
+
+            }
+        })
+
+    }
+
+</script>
+
+
+}
